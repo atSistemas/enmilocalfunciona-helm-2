@@ -1,0 +1,23 @@
+# `schedule` and `successfulJobsHistoryLimit` are optional parameters. They default to `"0 * * * *"` and `3` respectively
+sync:
+  repos:
+    - name: stable
+      url: https://kubernetes-charts.storage.googleapis.com
+      schedule: "0 * * * *"
+      successfulJobsHistoryLimit: 1
+    - name: incubator
+      url: https://kubernetes-charts-incubator.storage.googleapis.com
+      schedule: "*/5 * * * *"
+    - name: monocular
+      url: https://helm.github.io/monocular
+    - name: bitnami
+      url: https://charts.bitnami.com
+    - name: brigade
+      url: https://brigadecore.github.io/charts
+    - name: jetstack
+      url: https://charts.jetstack.io
+    - name: gitlab
+      url: https://charts.gitlab.io/
+    - name: elastic
+      url: https://helm.elastic.co
+      schedule: "*/5 * * * *"

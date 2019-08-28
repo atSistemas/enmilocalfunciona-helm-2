@@ -1,7 +1,9 @@
 # Despliega tus aplicaciones en Kubernetes con Helm (II)
-Repositorio de código del artículo de [enmilocalfunciona.io](https://enmilocalfunciona.io/despliega-tu-aplicaciones-en-kubernetes-con-helm-ii/)
+
+Repositorio de código del artículo de [enmilocalfunciona.io](https://enmilocalfunciona.io/despliega-tus-aplicaciones-en-kubernetes-con-helm-ii-monocular-chart-museum)
 
 ## Requirements
+
 - [Kubernetes](https://kubernetes.io/)
 - [Helm](https://helm.sh/)
 - [Ingress enabled](https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md)
@@ -11,6 +13,7 @@ Repositorio de código del artículo de [enmilocalfunciona.io](https://enmilocal
 Note: We use minikube to simplify the example
 
 ### Make sure Ingress is running
+
 ```sh
 # make sure ingress in enabled
 minikube addons enable ingress
@@ -38,6 +41,7 @@ tiller-deploy-75f6c87b87-zb47t              1/1     Running   0          10m
 ```sh
 helm repo add monocular https://helm.github.io/monocular
 ```
+
 ### Create custom repo list file
 
 ```sh
@@ -95,17 +99,29 @@ helm upgrade --install chart-museum stable/chartmuseum --namespace chart-museum
 kubectl get pods -w -n chart-museum
 ```
 
-### Check is accesible
+### Retrieve Chart Museum service name
 
 ```sh
-export POD_NAME=$(kubectl get pods --namespace chart-museum -l "app=chartmuseum" -l "release=chart-museum" -o jsonpath="{.items[0].metadata.name}")
-
-kubectl port-forward $POD_NAME 8080:8080 --namespace chart-museum
-
-##open http://localhost:8080
-
+kubectl get services -n chart-museum
 ```
 
+### Add Chart Museum repo
+
+```sh
+# edit custom-repos.yaml and add
+sync:
+  repos:
+    ...
+    - name: chart-museum
+      url: http://chart-museum-chartmuseum.chart-museum:8080
+```
+
+### Deploy new monocular release with repo changes
+
+```sh
+helm upgrade --install monocular -f custom-repos.yaml monocular/monocular --namespace monocular
+```
 
 ## More info
+
 - [Previous post](https://enmilocalfunciona.io/despliega-tu-aplicaciones-en-kubernetes-con-helm/)

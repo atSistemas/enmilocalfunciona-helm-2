@@ -1,6 +1,6 @@
 # Despliega tus aplicaciones en Kubernetes con Helm (II)
 
-Repositorio de código del artículo de [enmilocalfunciona.io](https://enmilocalfunciona.io/despliega-tus-aplicaciones-en-kubernetes-con-helm-ii-monocular-chart-museum)
+Repositorio de código del artículo de [enmilocalfunciona.io](https://enmilocalfunciona.io/despliega-tus-aplicaciones-en-kubernetes-con-helm-ii-monocular-chart-museum/)
 
 ## Requirements
 

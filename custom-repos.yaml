@@ -21,3 +21,6 @@ sync:
     - name: elastic
       url: https://helm.elastic.co
       schedule: "*/5 * * * *"
+    - name: chart-museum
+      url: http://chart-museum-chartmuseum.chart-museum:8080
+      schedule: "*/1 * * * *"
